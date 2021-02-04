@@ -12,7 +12,7 @@ class Movies extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllMovies(this.props.user.user.token);
+        this.props.getAllMovies();
         console.log("hej");
     }
 
