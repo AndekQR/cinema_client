@@ -9,6 +9,7 @@ import SeatPicker from "react-seat-picker";
 import update from 'immutability-helper'
 import Confirmation from "./confirmation/Confirmation";
 import PersonalData from "./personalData/PersonalData";
+import "./test.css"
 
 const styles = (theme) => ({
   root: {
@@ -347,7 +348,7 @@ class test extends Component {
                     switch (this.state.activeStep) {
                       case 0:
                         return (
-                          <div className="container">
+                          <div className="container" >
                             <h1>Seat Picker</h1>
                             <div style={{ marginTop: "100px" }}>
                               <SeatPicker
