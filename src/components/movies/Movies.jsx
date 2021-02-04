@@ -1,73 +1,84 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, {Component} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import { getAllMovies } from "../../actions/movieActions";
+import {getAllMovies} from "../../actions/movieActions";
 import MoviesResult from "./MoviesResult";
 
 class Movies extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { movies: [], isLoading: true };
-  }
-
-  componentDidMount() {
-    this.props.getAllMovies(this.props.user.user.token);
-    console.log("hej");
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.movies !== prevProps.movies) {
-      console.log("raz");
-      this.setState({
-        movies: this.props.movies,
-        isLoading: false,
-      });
+    constructor(props) {
+        super(props);
+        this.state = {movies: [], isLoading: true};
     }
-  }
 
-  render() {
-      console.log(this.state.movies)
-    if (this.state.isLoading) return <div>laduje</div>;
-    const resultAlgorithm = (tab) => {
-      if (tab.length < 1) {
-        return (
-          <div
-            className="alert alert-danger text-center col-7 col-md-5"
-            role="alert"
-            style={{
-              position: "relative",
-              textAlign: "center",
-              margin: "auto",
-            }}
-          >
-            Nie znaleziono repertuaru
-          </div>
-        );
-      } else if (tab.length >= 1) {
-        return tab.map((result) => {
-          return <MoviesResult key={result.id} result={result} />;
-        });
-      }
-    };
+    componentDidMount() {
+        this.props.getAllMovies(this.props.user.user.token);
+        console.log("hej");
+    }
 
-    let resultContent = resultAlgorithm(this.state.movies);
+    componentDidUpdate(prevProps) {
+        if (this.props.movies.movies !== undefined && this.props.movies !== prevProps.movies) {
+            console.log("raz");
+            console.log(this.props.movies)
+            this.setState({
+                movies: this.props.movies.movies.content,
+                isLoading: false,
+            });
+        }
+    }
 
-    return <div>{resultContent}</div>;
-  }
+    render() {
+
+        return <div>
+            {(this.state.movies !== undefined && this.state.movies.length >= 0) &&
+            this.state.movies.map((result) => {
+                return <MoviesResult key={result.id} result={result}/>;
+            })
+            }
+        </div>
+
+
+        // console.log(this.state.movies)
+        // if (this.state.isLoading) return <div>laduje</div>;
+        // const resultAlgorithm = (tab) => {
+        //     if (tab.length < 1) {
+        //         return (
+        //             <div
+        //                 className="alert alert-danger text-center col-7 col-md-5"
+        //                 role="alert"
+        //                 style={{
+        //                     position: "relative",
+        //                     textAlign: "center",
+        //                     margin: "auto",
+        //                 }}
+        //             >
+        //                 Nie znaleziono repertuaru
+        //             </div>
+        //         );
+        //     } else if (tab.length >= 1) {
+        //         return tab.map((result) => {
+        //             return <MoviesResult key={result.id} result={result}/>;
+        //         });
+        //     }
+        // };
+        //
+        // let resultContent = resultAlgorithm(this.state.movies);
+        //
+        // return <div>{resultContent}</div>;
+    }
 }
 
 Movies.propTypes = {
-  getAllMovies: PropTypes.func.isRequired,
-  movies: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+    getAllMovies: PropTypes.func.isRequired,
+    movies: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
-  user: state.user,
+    movies: state.movies,
+    user: state.user,
 });
 
 export default connect(mapStateToProps, {
-  getAllMovies,
+    getAllMovies,
 })(Movies);
