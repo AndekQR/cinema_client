@@ -14,6 +14,7 @@ class Login extends Component {
     };
   }
 
+
   
   handleChange = e => {
     this.setState({
@@ -28,7 +29,7 @@ class Login extends Component {
       password: this.state.password
     };
 
-    this.props.postLogin(login);
+    this.props.postLogin(login, this.props.history);
 
     console.log(login);
   };
