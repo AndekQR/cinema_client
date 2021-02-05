@@ -34,11 +34,11 @@ const Info = () => (
                 swoim Widzom także seanse specjalne takie jak: Kino na Temat
                 czy Kultura Dostępna. Kino nie zapomina także o najmłodszych
                 Widzach, którym dedykuje liczne wydarzenia specjalne organizowane
-                cyklicznie w ramach projektu Helios dla Dzieci.</p>
+                cyklicznie w ramach projektu CINEMA dla Dzieci.</p>
 
             <p>    Gości przyciąga znakomita atmosfera towarzysząca wszystkim
                 pokazom filmowym oraz repertuar, w którym każdy Widz znajdzie
-                coś dla siebie. W kinie funkcjonuje także Helios Café, w której
+                coś dla siebie. W kinie funkcjonuje także CINEMA Café, w której
                 można napić się aromatycznej kawy w wielu smakach oraz bar kinowy,
                 który oferuje Widzom świeży popcorn, napoje oraz duży wybór słodyczy.</p></div>
     </div>
