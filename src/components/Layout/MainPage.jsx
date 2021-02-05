@@ -26,7 +26,7 @@ class MainPage extends Component {
                                 KINOWE EMOCJE W NIŻSZEJ CENIE | Bilety już od 14,90 zł
                             </p>
                             <button type="button" className="btn btn-info shadow">
-                                <Link to="/baza-zaginionych/panel-ludzi">
+                                <Link to="/repertuar">
                                     Sprawdź repertuar
                                 </Link>
                             </button>
