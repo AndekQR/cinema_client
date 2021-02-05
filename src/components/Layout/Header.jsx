@@ -24,7 +24,9 @@ class Header extends Component {
           </li>
           <li className={"menu"}>
             <a className="menu-link" >
+              <Link to = "/pricelist">
               CENNIK
+              </Link>
             </a>
           </li>
           <li className={"menu"}>
