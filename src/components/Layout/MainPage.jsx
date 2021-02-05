@@ -6,16 +6,15 @@ import card_zdj1 from "../../images/card_zdj1.jpg";
 import card_zdj2 from "../../images/card_zdj2.jpg";
 import card_zdj3 from "../../images/card_zdj3.jpg";
 
-import "../../styles/mainPage.css";
+import "./mainPage.css";
 
 class MainPage extends Component {
     render() {
         return (
             <div className="container">
                 <div className="main-content">
-                    <center>
-                        <button type="button" class="btn btn-secondary btn-lg">Zaloguj się</button>
-                    </center>
+                        <button type="button"  class="btn btn-secondary btn-lg" ><a href="/login">Zaloguj się</a>
+                        </button>
 
                     <hr className="featurette-divider"/>
                     <div className="row-featurette">
@@ -27,7 +26,7 @@ class MainPage extends Component {
                                 KINOWE EMOCJE W NIŻSZEJ CENIE | Bilety już od 14,90 zł
                             </p>
                             <button type="button" className="btn btn-info shadow">
-                                <Link to="/baza-zaginionych/panel-ludzi">
+                                <Link to="/repertuar">
                                     Sprawdź repertuar
                                 </Link>
                             </button>
@@ -92,7 +91,7 @@ class MainPage extends Component {
                                     <p className="card-text">
                                         Zapraszamy do naszego kina w Bydgoszczy!
                                     </p>
-                                    <Link to="/baza-zaginionych/panel-ludzi">
+                                    <Link to="/baza-zaginionych">
                                         <button type="button" className="btn btn-link">Czytaj więcej</button>
                                     </Link>
                                 </div>

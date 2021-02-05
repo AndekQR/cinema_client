@@ -1,0 +1,139 @@
+.container {
+	/* display: block; */
+	background-color: #fff;
+	
+}
+
+.main-content {
+	border: 1px solid white;
+}
+
+.carousel {
+	position: relative;
+	box-sizing: border-box;
+	margin-bottom: 4rem;
+}
+
+.carousel-indicators {
+	position: absolute;
+	display: flex;
+}
+
+.carousel-indicators li {
+	display: list-item;
+}
+
+.carousel-inner {
+	position: relative;
+}
+
+.carousel-inner .carousel-item {
+	height: 80vh;
+	background-color: #777;
+}
+
+.carousel-caption {
+	color: black;
+}
+
+.team {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.col-lg-4 {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+img {
+	background-color: #5a5a5a;
+	vertical-align: middle;
+	border-style: none;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	padding-right: -15px;
+	padding-left: -15px;
+}
+
+.featurette-divider {
+	margin: 5rem 0;
+}
+
+/* ---------------------------------BAZA------------------------------ */
+
+.row-featurette {
+	display: flex;
+	padding-right: -15px;
+	padding-left: -15px;
+	flex-wrap: wrap;
+}
+
+.featurette-heading {
+	line-height: 1;
+	letter-spacing: 1px;
+	margin-bottom: 3vh;
+	font-weight: 400;
+}
+
+.text-muted {
+	color: #6c757d !important;
+}
+
+.lead {
+	font-size: 1.25rem;
+	font-weight: 300;
+	text-align: left;
+	margin-bottom: 2vh;
+}
+
+p {
+	display: block;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-top: 0;
+	text-align: left;
+}
+
+.img-fluid {
+	max-width: 100%;
+}
+
+img {
+	vertical-align: middle;
+	border-style: none;
+}
+
+button.btn.btn-secondary.btn-lg
+{
+	display: flex;
+	margin: 0 auto;
+}
+
+button a {
+	display: block;
+	color: white;
+	font-size: 18px;
+}
+
+button a:hover {
+	text-decoration: none;
+	color: white;
+	font-size: 19px;
+}
+
+.card-title {
+	min-height: 50px;
+}
+
+.card-text {
+	min-height: 50px;
+}
