@@ -91,7 +91,7 @@ class MainPage extends Component {
                                     <p className="card-text">
                                         Zapraszamy do naszego kina w Bydgoszczy!
                                     </p>
-                                    <Link to="/baza-zaginionych/panel-ludzi">
+                                    <Link to="/baza-zaginionych">
                                         <button type="button" className="btn btn-link">Czytaj więcej</button>
                                     </Link>
                                 </div>
