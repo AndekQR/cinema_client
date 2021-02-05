@@ -14,6 +14,7 @@ import Header from "./components/Layout/Header";
 import Movies from "./components/movies/Movies";
 import Login from "./components/Content/UserManagment/Login";
 import PriceList from "./components/priceList/PriceList";
+import Info from "./components/info/Info";
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path="/movies" component={Movies} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/pricelist" component={PriceList} />
+          <Route exact path="/info" component={Info} />
         </Router>
       </Provider>
     );
