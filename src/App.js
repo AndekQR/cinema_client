@@ -26,7 +26,6 @@ class App extends Component {
           <Route exact path="/test" component={test} />
           <Route exact path="/movies" component={Movies} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/personal" component={PersonalData} />
           <Route exact path="/pricelist" component={PriceList} />
         </Router>
       </Provider>
