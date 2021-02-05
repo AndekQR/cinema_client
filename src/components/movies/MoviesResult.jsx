@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./movies.css"
 
 class MoviesResult extends Component {
   render() {
@@ -13,6 +14,7 @@ class MoviesResult extends Component {
           }}
           style={{ textDecoration: "none" }}
         >
+          <div className={"movies"}>
           <div className="card mb-3">
             <div className="row g-0">
               <div className="col-md-4">
@@ -47,6 +49,7 @@ class MoviesResult extends Component {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </Link>
       </React.Fragment>
