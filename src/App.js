@@ -7,9 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
 import MainPage from "./components/Layout/MainPage";
-import test from "./components/test";
+import Reservation from "./components/reservation/Reservation";
 import store from "./redux/store";
-import PersonalData from "./components/personalData/PersonalData";
 import Header from "./components/Layout/Header";
 import Movies from "./components/movies/Movies";
 import Login from "./components/Content/UserManagment/Login";
@@ -24,7 +23,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={MainPage} />
           <Route exact path="/repertuar" component={Movies} />
-          <Route exact path="/test" component={test} />
+          <Route exact path="/reservation" component={Reservation} />
           <Route exact path="/movies" component={Movies} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/pricelist" component={PriceList} />

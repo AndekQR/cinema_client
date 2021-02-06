@@ -9,8 +9,8 @@ class ConfirmationResult extends Component {
         <div class="row">
           <div class="col-sm">Miejsce: {result.number}</div>
           <div class="col-sm">Rząd: {result.row}</div>
-          <div class="col-sm">One of three columns</div>
-          <div class="col-sm">One of three columns</div>
+          <div class="col-sm">Bilet: {result.bilet} </div>
+          <div class="col-sm">Cena: {result.cost} zł</div>
         </div>
         <hr/>
         </React.Fragment>

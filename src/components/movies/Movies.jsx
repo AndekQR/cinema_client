@@ -8,21 +8,18 @@ import MoviesResult from "./MoviesResult";
 class Movies extends Component {
     constructor(props) {
         super(props);
-        this.state = {movies: [], isLoading: true};
+        this.state = {movies: []};
     }
 
     componentDidMount() {
         this.props.getAllMovies();
-        console.log("hej");
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.movies.movies !== undefined && this.props.movies !== prevProps.movies) {
-            console.log("raz");
             console.log(this.props.movies)
             this.setState({
-                movies: this.props.movies.movies.content,
-                isLoading: false,
+                movies: this.props.movies.movies.content
             });
         }
     }
@@ -37,34 +34,6 @@ class Movies extends Component {
             }
         </div>
 
-
-        // console.log(this.state.movies)
-        // if (this.state.isLoading) return <div>laduje</div>;
-        // const resultAlgorithm = (tab) => {
-        //     if (tab.length < 1) {
-        //         return (
-        //             <div
-        //                 className="alert alert-danger text-center col-7 col-md-5"
-        //                 role="alert"
-        //                 style={{
-        //                     position: "relative",
-        //                     textAlign: "center",
-        //                     margin: "auto",
-        //                 }}
-        //             >
-        //                 Nie znaleziono repertuaru
-        //             </div>
-        //         );
-        //     } else if (tab.length >= 1) {
-        //         return tab.map((result) => {
-        //             return <MoviesResult key={result.id} result={result}/>;
-        //         });
-        //     }
-        // };
-        //
-        // let resultContent = resultAlgorithm(this.state.movies);
-        //
-        // return <div>{resultContent}</div>;
     }
 }
 

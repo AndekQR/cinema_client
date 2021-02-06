@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./header.css"
-
+import "./header.css";
 
 class Header extends Component {
   render() {
@@ -9,37 +8,28 @@ class Header extends Component {
       <div className={"header"}>
         <ul className={"menu"}>
           <li className={"menu"}>
-            <a className="menu-link" >
-            <Link to = "/"> 
+            <Link className="menu-link" to="/">
               CINEMA
-              </Link>
-            </a>
+            </Link>
           </li>
           <li className={"menu"}>
-            <a className="menu-link" >
-            <Link to = "/repertuar"> 
+            <Link className="menu-link" to="/repertuar">
               REPERTUAR
-              </Link>
-            </a>
+            </Link>
           </li>
           <li className={"menu"}>
-            <a className="menu-link" >
-              <Link to = "/pricelist">
+            <Link className="menu-link" to="/pricelist">
               CENNIK
-              </Link>
-            </a>
+            </Link>
           </li>
           <li className={"menu"}>
-            <a className="menu-link">
-              <Link to = "/info"> KINO
-              </Link>
-
-            </a>
+            <Link className="menu-link" to="/info">
+              {" "}
+              KINO
+            </Link>
           </li>
           <li className={"menu"}>
-            <a className="menu-link" >
-              Informacja 600 500 300
-            </a>
+            <a className="menu-link">Informacja 600 500 300</a>
           </li>
         </ul>
       </div>

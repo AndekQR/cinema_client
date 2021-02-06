@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./personalData.css";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import {makeReservation} from "../../actions/userActions";
 
 class PersonalData extends Component {
   constructor() {
@@ -10,7 +12,36 @@ class PersonalData extends Component {
       lastname: "",
       email: "",
       number: "",
+      seats: []
     };
+  }
+
+//   componentDidUpdate(prevProps){
+
+//     if (this.seats !== prevProps.selectedSeats) {
+
+//       this.props.selectedSeats.forEach(item => {
+    
+//         this.setState({})
+//       })
+
+//   }
+// }
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+
+    // this.props.makeReservation((this.props.selectedSeats., this.props.history);
+
+  };
+
+  componentDidMount() {
+    this.setState({
+      name: this.props.user.user.firstName,
+      lastname: this.props.user.user.lastName,
+      email: this.props.user.user.email,
+    });
   }
 
   handleChange = (e) => {
@@ -18,6 +49,16 @@ class PersonalData extends Component {
   };
 
   render() {
+    // var seats = []
+    // console.log(seats)
+    // this.props.selectedSeats.forEach(item => {
+    //   console.log(item.id)
+    //   for (var i = 1; i < item.length; i++) {
+    //     console.log(item)
+    //     this.setState({
+    //      seats: seats[i - 1].push([item[0], item[i]])
+    //   })}
+    // });
     return (
       <div className="container">
         <h4 style={{ textAlign: "center" }}>Wprowadź swoje dane osobowe</h4>
@@ -39,27 +80,52 @@ class PersonalData extends Component {
             class="form-control"
             id="formGroupExampleInput2"
             placeholder="Nazwisko"
+            name="lastname"
+            value={this.state.lastname}
+            onChange={this.handleChange}
           />
         </div>
         <div class="mb-3">
           <input
-            type="text"
+            type="email"
             class="form-control"
             id="formGroupExampleInput2"
             placeholder="E-mail"
+            name="email"
+            value={this.state.email}
+            onChange={this.handleChange}
           />
         </div>
         <div class="mb-3">
           <input
-            type="text"
+            type="number"
             class="form-control"
             id="formGroupExampleInput2"
             placeholder="Numer telefonu"
+            name="number"
+            value={this.state.number}
+            onChange={this.handleChange}
           />
         </div>
+        <button
+          type="submit"
+          class="btn btn-secondary btn-lg"
+          onClick={this.handleSubmit}
+        >
+          Płatność
+        </button>
       </div>
     );
   }
 }
 
-export default PersonalData;
+PersonalData.propTypes = {
+  makeReservation: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, {makeReservation})(PersonalData);

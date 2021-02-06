@@ -7,8 +7,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SeatPicker from "react-seat-picker";
 import update from 'immutability-helper'
-import Confirmation from "./confirmation/Confirmation";
-import PersonalData from "./personalData/PersonalData";
+import Confirmation from "../confirmation/Confirmation";
+import PersonalData from "../personalData/PersonalData";
 import "./test.css"
 
 const styles = (theme) => ({
@@ -24,14 +24,14 @@ const styles = (theme) => ({
   },
 });
 
-class test extends Component {
+class Reservation extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
       activeStep: 0,
       loading: false,
-      selectedSeats: [],
+      selectedSeats: []
     };
   }
 
@@ -58,7 +58,7 @@ class test extends Component {
         const newTooltip = `tooltip for id-${id} added by callback`;
         addCb(row, number, id, newTooltip);
         this.setState(prevState => ({ loading: false,
-         selectedSeats:  [...prevState.selectedSeats, { row, number, id }]}));
+         selectedSeats:  [...prevState.selectedSeats, { row, number, id, bilet: "normalny", cost: 22.00}]}));
       }
     );
   };
@@ -375,7 +375,7 @@ class test extends Component {
                         )
                       case 2:
                         return (
-                          <PersonalData/>
+                          <PersonalData selectedSeats={this.state.selectedSeats}/>
                         )
                       default:
                         return "Unknown stepIndex";
@@ -415,4 +415,4 @@ class test extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(test);
+export default withStyles(styles, { withTheme: true })(Reservation);
