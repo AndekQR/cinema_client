@@ -5,11 +5,7 @@ import { moviesApi } from "../API/moviesApi";
 export const postLogin = ({ username, password }, history) => async (
   dispatch
 ) => {
-  // const config = {
-  //     headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  // }
+
   try {
     return userApi.login(username, password).then((userData) => {
       dispatch({
@@ -18,13 +14,7 @@ export const postLogin = ({ username, password }, history) => async (
       });
       history.push("/");
     });
-    // return await axios.post(`http://localhost:8080/auth/login`, { username, password }, config).then(res=> {
-    //     dispatch({
-    //         type: LOGIN_SUCCESS,
-    //         payload: res.data
-    //     });
-    //     history.push('/');
-    // });
+
   } catch (err) {}
 };
 

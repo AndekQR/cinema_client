@@ -1,3 +1,13 @@
+.searchBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.searchBar .button {
+    margin: 10px;
+}
 .movies
 {
     max-width: 60%;

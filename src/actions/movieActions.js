@@ -8,11 +8,7 @@ export const getAllMovies = (
   sortOrder = "asc",
   searchQuery = ""
 ) => async (dispatch) => {
-  // const config = {
-  //     headers: { Authorization: `Bearer ${token}` }
-  // };
-  // console.log(token)
-  //
+
   try {
     return moviesApi
       .getMoviesPage(pageNumber, pageSize, sortBy, sortOrder, searchQuery)
@@ -23,12 +19,6 @@ export const getAllMovies = (
         });
       });
 
-    // return await axios.get(`http://localhost:8080/movies?pageNumber=0&pageSize=5&sortBy=title&sortOrder=asc&searchQuery=`,
-    // config).then(res=> {
-    //     dispatch({
-    //         type: GET_ALL_MOVIES,
-    //         payload: res.data
-    //     });
-    // });
+
   } catch (err) {}
 };

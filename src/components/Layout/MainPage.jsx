@@ -13,7 +13,7 @@ class MainPage extends Component {
         return (
             <div className="container">
                 <div className="main-content">
-                        <button type="button"  class="btn btn-secondary btn-lg" ><a href="/login">Zaloguj się</a>
+                        <button type="button"  className="btn btn-secondary btn-lg" ><a href="/login">Zaloguj się</a>
                         </button>
 
                     <hr className="featurette-divider"/>
