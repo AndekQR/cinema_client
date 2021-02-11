@@ -25,7 +25,7 @@ class Hall extends Component {
   }
 
   componentDidUpdate(prevState){
-      if(this.props.chairs == undefined && this.props.reservatedChairs == undefined){
+      if(this.props.chairs === undefined || this.props.reservatedChairs === undefined || this.props.chairs.length === 0){
           return
       }
       console.log(prevState.mappedChairs);

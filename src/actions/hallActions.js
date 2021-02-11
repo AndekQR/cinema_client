@@ -1,4 +1,10 @@
-import { GET_CHAIRS_BY_HALL, ADD_SELECTED_SEAT, DELETE_SELECTED_SEAT, GET_RESERVATED_CHAIRS_BY_HALL } from "./types";
+import {
+  GET_CHAIRS_BY_HALL,
+  ADD_SELECTED_SEAT,
+  DELETE_SELECTED_SEAT,
+  GET_RESERVATED_CHAIRS_BY_HALL,
+  CLEAR_SELECTED_SEATS
+} from "./types";
 import { moviesApi } from "../API/moviesApi";
 
 export const getChairsByCinemaHall = (cinemaHallID) => async (dispatch) => {
@@ -37,3 +43,9 @@ export const deleteSelectedSeat = (id) => {
     payload: id,
   };
 };
+
+export const clearSelectedSeats = () => {
+  return {
+    type: CLEAR_SELECTED_SEATS,
+  }
+}

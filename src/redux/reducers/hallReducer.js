@@ -1,5 +1,5 @@
 import {
-  ADD_SELECTED_SEAT,
+  ADD_SELECTED_SEAT, CLEAR_SELECTED_SEATS,
   DELETE_SELECTED_SEAT,
   GET_CHAIRS_BY_HALL,
   GET_RESERVATED_CHAIRS_BY_HALL,
@@ -24,8 +24,6 @@ export default function (state = initialState, action) {
         reservatedChairs: action.payload,
       };
     case ADD_SELECTED_SEAT:
-      console.log(action.payload);
-      console.log(state.selectedSeats);
       return {
         ...state,
         selectedSeats: [...state.selectedSeats, action.payload],
@@ -37,6 +35,11 @@ export default function (state = initialState, action) {
           (seat) => seat.id !== action.payload
         ),
       };
+    case CLEAR_SELECTED_SEATS:
+        return {
+          ...state,
+          selectedSeats: []
+        }
     default:
       return state;
   }
