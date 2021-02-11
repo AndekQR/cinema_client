@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 class ConfirmationResult extends Component {
   render() {
-    const { result } = this.props;
+    const { result, chairs } = this.props;
 
     return (
         <React.Fragment>
-        <div class="row">
-          <div class="col-sm">Miejsce: {result.number}</div>
-          <div class="col-sm">Rząd: {result.row}</div>
-          <div class="col-sm">Bilet: {result.bilet} </div>
-          <div class="col-sm">Cena: {result.cost} zł</div>
+        <div className="row">
+          <div className="col-sm">Miejsce: {result.number + 1}</div>
+          <div className="col-sm">Rząd: {Math.ceil((result.number + 1) / 5)}</div>
+          <div className="col-sm">Bilet: {result.type} </div>
+          <div className="col-sm">Cena: 22 zł</div>
         </div>
         <hr/>
         </React.Fragment>

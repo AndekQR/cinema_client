@@ -54,7 +54,7 @@ class Movies extends Component {
 
     render() {
 
-        return <div>
+        return <div className="container">
             <div className={"searchBar"}>
                 <TextField value={this.state.searchQuery} className={"textField"} variant={"filled"} label={"Tytuł"}
                            onChange={event => {
@@ -74,8 +74,9 @@ class Movies extends Component {
                 })
             }
             <Pagination count={this.state.pagesCount} page={this.state.currentPage} onChange={this.onPageChange}/>
+            <br/>
         </div>
-
+        
     }
 }
 

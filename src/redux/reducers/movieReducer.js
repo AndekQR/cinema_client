@@ -3,7 +3,7 @@ import {
   } from "../../actions/types";
 
 const initialState = {
-    movies: [],
+    movies: []
   };
   
   export default function(state = initialState, action) {
@@ -13,7 +13,6 @@ const initialState = {
           ...state,
           movies: action.payload
         };
- 
       default:
         return state;
     }

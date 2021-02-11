@@ -10,7 +10,8 @@ export const moviesApi = {
     getCinemaHallsByCinema,
     getCinemaHall,
     getAllGenres,
-    getMoviesByGenre
+    getMoviesByGenre,
+    getReservatedChairsByHall
 }
 
 
@@ -44,14 +45,14 @@ function getMoviesPage(pageNumber,
 /**
  *
  * @param chairIds {[number]} - lista z id foteli do zarezerwowania
- * @param movieId {number}
+ * @param moveId {number}
  * @param price {number}
  * @returns {Promise<AxiosResponse<any>>}
  */
-function makeReservation(chairIds, movieId, price) {
+function makeReservation(chairIds, moveId, price) {
     return axiosInstance(true, true)
         .post("/reservation", {
-            chairIds, movieId, price
+            chairIds, moveId, price
         })
         .then(response => {
             return response.data
@@ -59,6 +60,13 @@ function makeReservation(chairIds, movieId, price) {
         .catch(error => {
             console.log(error.response)
         })
+}
+
+function getReservatedChairsByHall(cinemaHallId, movieId) {
+    return axiosInstance(true, true)
+        .get("/reservations/chairs/"+cinemaHallId+"/"+movieId)
+        .then(response => response.data)
+        .catch(error => console.log(error.response))
 }
 
 function getChairsByCinemaHall(cinemaHallId) {

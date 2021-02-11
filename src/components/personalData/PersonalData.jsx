@@ -20,11 +20,14 @@ class PersonalData extends Component {
 
 //     if (this.seats !== prevProps.selectedSeats) {
 
-//       this.props.selectedSeats.forEach(item => {
+//       const abc = this.props.selectedSeats.map(item => {
     
-//         this.setState({})
+//         return item.id
 //       })
 
+//       this.setState({
+//         seats: abc
+//       })
 //   }
 // }
 
@@ -37,10 +40,17 @@ class PersonalData extends Component {
   };
 
   componentDidMount() {
+    const abc = this.props.selectedSeats.map(item => {
+    
+      return item.id
+    })
+
+
     this.setState({
       name: this.props.user.user.firstName,
       lastname: this.props.user.user.lastName,
       email: this.props.user.user.email,
+      seats: abc
     });
   }
 

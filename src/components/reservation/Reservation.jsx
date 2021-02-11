@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import PropTypes from "prop-types";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SeatPicker from "react-seat-picker";
-import update from 'immutability-helper'
+import update from "immutability-helper";
 import Confirmation from "../confirmation/Confirmation";
 import PersonalData from "../personalData/PersonalData";
-import "./test.css"
+import "./test.css";
+import Hall from "../seat/Hall";
+import axios from "axios";
+import StripeCheckout from "react-stripe-checkout";
+import { makeReservation } from "../../actions/userActions";
 
 const styles = (theme) => ({
   root: {
@@ -27,11 +34,11 @@ const styles = (theme) => ({
 class Reservation extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       activeStep: 0,
       loading: false,
-      selectedSeats: []
+      selectedSeats: [],
     };
   }
 
@@ -57,8 +64,13 @@ class Reservation extends Component {
         console.log(`Added seat ${number}, row ${row}, id ${id}`);
         const newTooltip = `tooltip for id-${id} added by callback`;
         addCb(row, number, id, newTooltip);
-        this.setState(prevState => ({ loading: false,
-         selectedSeats:  [...prevState.selectedSeats, { row, number, id, bilet: "normalny", cost: 22.00}]}));
+        this.setState((prevState) => ({
+          loading: false,
+          selectedSeats: [
+            ...prevState.selectedSeats,
+            { row, number, id, bilet: "normalny", cost: 22.0 },
+          ],
+        }));
       }
     );
   };
@@ -74,11 +86,39 @@ class Reservation extends Component {
         // A value of null will reset the tooltip to the original while '' will hide the tooltip
         const newTooltip = ["A", "B", "C"].includes(row) ? null : "";
         removeCb(row, number, newTooltip);
-        this.setState((prevState) => ({ loading: false,
-          selectedSeats:  update(prevState.selectedSeats, {$splice: [[row, 1]]
-        })}));
+        this.setState((prevState) => ({
+          loading: false,
+          selectedSeats: update(prevState.selectedSeats, {
+            $splice: [[row, 1]],
+          }),
+        }));
       }
     );
+  };
+
+  handleToken = async (token) => {
+    const price = this.props.selectedSeats.length * 22;
+    const amount = this.props.selectedSeats.length * 22;
+    const moveId = this.props.location.state.result.id;
+    const chairIds = this.props.selectedSeats.map((item) => {
+      return item.id;
+    });
+
+    const reserv = { chairIds, moveId, price };
+    console.log(reserv);
+    const response = await axios.post("http://localhost:3030/checkout", {
+      token,
+      amount,
+    });
+
+    const { status } = response.data;
+    console.log("Response:", response.data);
+    if (status === "success") {
+      window.alert("Sukces! Sprawdź email po więcej informacji");
+      this.props.makeReservation(reserv, this.props.history);
+    } else {
+      window.alert("Coś poszło nie tak", { type: "error" });
+    }
   };
 
   getSteps = () => {
@@ -112,7 +152,7 @@ class Reservation extends Component {
   };
 
   handleReset = () => {
-    this.setState({ activeStep: this.state.activeStep = 0 });
+    this.setState({ activeStep: (this.state.activeStep = 0) });
   };
 
   render() {
@@ -140,7 +180,7 @@ class Reservation extends Component {
         { id: 12, number: 12 },
         null,
         null,
-        null
+        null,
       ],
       [
         null,
@@ -280,7 +320,7 @@ class Reservation extends Component {
         null,
         null,
         null,
-        { id: 1, number: 1 , isReserved: true,},
+        { id: 1, number: 1, isReserved: true },
         { id: 2, number: 2 },
         { id: 3, number: 3 },
         { id: 4, number: 4 },
@@ -332,7 +372,7 @@ class Reservation extends Component {
               </Step>
             ))}
           </Stepper>
-          <hr/>
+          <hr />
           <div>
             {this.state.activeStep === steps.length ? (
               <div>
@@ -347,47 +387,60 @@ class Reservation extends Component {
                   {(() => {
                     switch (this.state.activeStep) {
                       case 0:
-                        return (
-                          <div className="container" >
-                            <h1>Seat Picker</h1>
-                            <div style={{ marginTop: "100px" }}>
-                              <SeatPicker
-                                addSeatCallback={
-                                  this.addSeatCallbackContinousCase
-                                }
-                                cos = {this.addSeatCallbackContinousCase}
-                                removeSeatCallback={this.removeSeatCallback}
-                                rows={rows}
-                                maxReservableSeats={3}
-                                alpha
-                                visible
-                                selectedByDefault
-                                loading={loading}
-                                tooltipProps={{ multiline: true }}
-                                continuous
-                              />
-                            </div>
-                          </div>
-                        );
+                        return <Hall movie={this.props.location.state}/>;
                       case 1:
                         return (
-                          <Confirmation selectedSeats={this.state.selectedSeats}/>
-                        )
+                          <React.Fragment>
+                            <h1>{this.props.location.state.result.title}</h1>
+                            <h1>{this.props.location.state.result.year}</h1>
+                            <span>
+                              data:{" "}
+                              {this.props.location.state.result.startTime.slice(
+                                0,
+                                10
+                              )}{" "}
+                              / godzina:{" "}
+                              {this.props.location.state.result.startTime.slice(
+                                11,
+                                16
+                              )}{" "}
+                              / sala: 4
+                            </span>
+                            <hr />
+                            <Confirmation />
+                          </React.Fragment>
+                        );
                       case 2:
                         return (
-                          <PersonalData selectedSeats={this.state.selectedSeats}/>
-                        )
+                          <StripeCheckout
+                            stripeKey="pk_test_8VCpBN8J5r2s5vGeV0mihHZA00EZ5unMxL"
+                            token={this.handleToken}
+                            amount={this.props.selectedSeats.length * 22 * 100}
+                            name={`Płatność do zamówienia`}
+                            panelLabel="Zapłać"
+                            currency="PLN"
+                            allowRememberMe={false}
+                          />
+                        );
                       default:
                         return "Unknown stepIndex";
                     }
                   })()}
                 </Typography>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <div>
                   <Button
                     disabled={this.state.activeStep === 0}
@@ -415,4 +468,16 @@ class Reservation extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Reservation);
+Reservation.propTypes = {
+  selectedSeats: PropTypes.array.isRequired,
+  makeReservation: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  selectedSeats: state.hall.selectedSeats,
+});
+
+export default compose(
+  connect(mapStateToProps, { makeReservation }),
+  withStyles(styles, { withTheme: true })
+)(Reservation);

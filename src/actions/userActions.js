@@ -18,11 +18,11 @@ export const postLogin = ({ username, password }, history) => async (
   } catch (err) {}
 };
 
-export const makeReservation = ({ chairIds, movieId, price }, history) => async (
+export const makeReservation = ({ chairIds, moveId, price }, history) => async (
     dispatch
   ) => {
     try {
-      return moviesApi.makeReservation(chairIds, movieId, price).then((response) => {
+      return moviesApi.makeReservation(chairIds, moveId, price).then((response) => {
         console.log(response);
         history.push("/");
       });

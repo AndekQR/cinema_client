@@ -1,24 +1,38 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Component } from "react";
+
 import ConfirmationResult from "./ConfirmationResult";
 
-const Confirmation = (props) => {
-  let results = props.selectedSeats.map((result) => {
-    return <ConfirmationResult key={result.id} result={result} />;
-  });
-  console.log()
-  return (
-    
-    <div>
-      <h1>WONDER WOMAN</h1>
-      <h1>1984 / dubbing</h1>
-      <span>data: 31.12.2020 / godzina: 20:00 / sala: 2</span>
-      <hr />
-      {results}
-      <div class="row justify-content-md-right">
-        <div class="col">Cena łączna: {(props.selectedSeats.reduce((a,v) =>  a = a + v.cost , 0 ))} PLN</div>
+class Confirmation extends Component {
+
+  render(){
+    let results = this.props.selectedSeats.map((result) => {
+      return <ConfirmationResult key={result.id} result={result} chairs={this.props.chairs}/>;
+    });
+    console.log(this.props.selectedSeats)
+    return (
+      
+      <div>
+        {results}
+        <div class="row justify-content-md-right">
+          <div class="col">Cena łączna: {results.length * 22} PLN</div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
-export default Confirmation;
+Confirmation.propTypes = {
+  selectedSeats: PropTypes.object.isRequired,
+  chairs: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  selectedSeats: state.hall.selectedSeats,
+  chairs: state.hall.chairs,
+});
+
+export default connect(mapStateToProps, null)(Confirmation);
+

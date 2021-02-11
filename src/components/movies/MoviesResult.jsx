@@ -35,8 +35,8 @@ class MoviesResult extends Component {
             <React.Fragment>
                 <Link
                     to={{
-                        pathname: "/test",
-                        state: {name: "jack", age: 25, city: "Antwerp"},
+                        pathname: "/reservation",
+                        state: {result},
                     }}
                     style={{textDecoration: "none"}}
                 >
