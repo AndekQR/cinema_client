@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import defaultCover from "./../../images/default.jpg"
 
-class MoviesResult extends Component {
+class RecommendationResult extends Component {
 
     constructor(props) {
         super(props);
@@ -81,4 +81,4 @@ class MoviesResult extends Component {
     }
 }
 
-export default MoviesResult;
+export default RecommendationResult;

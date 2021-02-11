@@ -18,6 +18,11 @@ class Header extends Component {
             </Link>
           </li>
           <li className={"menu"}>
+            <Link className="menu-link" to="/recommendation">
+              REKOMENDACJE
+            </Link>
+          </li>
+          <li className={"menu"}>
             <Link className="menu-link" to="/pricelist">
               CENNIK
             </Link>

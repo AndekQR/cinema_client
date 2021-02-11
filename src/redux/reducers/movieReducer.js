@@ -1,9 +1,10 @@
 import {
-    GET_ALL_MOVIES
+    GET_ALL_MOVIES, GET_ALL_RECOMMENDATION
   } from "../../actions/types";
 
 const initialState = {
-    movies: []
+    movies: [],
+    recommended: []
   };
   
   export default function(state = initialState, action) {
@@ -12,6 +13,11 @@ const initialState = {
         return {
           ...state,
           movies: action.payload
+        };
+        case GET_ALL_RECOMMENDATION:
+        return {
+          ...state,
+          recommended: action.payload
         };
       default:
         return state;

@@ -1,45 +1,64 @@
-import {axiosInstance} from "../helpers/axiosInstance";
+import { axiosInstance } from "../helpers/axiosInstance";
 
 export const moviesApi = {
-    getMoviesPage,
-    makeReservation,
-    getChairsByCinema,
-    getChairsByCinemaHall,
-    getCinemas,
-    getCinema,
-    getCinemaHallsByCinema,
-    getCinemaHall,
-    getAllGenres,
-    getMoviesByGenre,
-    getReservatedChairsByHall
+  getMoviesPage,
+  makeReservation,
+  getChairsByCinema,
+  getChairsByCinemaHall,
+  getCinemas,
+  getCinema,
+  getCinemaHallsByCinema,
+  getCinemaHall,
+  getAllGenres,
+  getMoviesByGenre,
+  getReservatedChairsByHall,
+  getRecommendationPage
+};
+
+function getMoviesPage(pageNumber, pageSize, sortBy, sortOrder, searchQuery) {
+  return axiosInstance(true, true)
+    .get("/movies", {
+      params: {
+        pageNumber,
+        pageSize,
+        sortBy,
+        sortOrder,
+        searchQuery,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+    })
+    .catch((error) => {
+      console.log("getMoviesPage");
+      console.log(error.response);
+      return Promise.reject(error);
+    });
 }
 
-
-function getMoviesPage(pageNumber,
-                       pageSize,
-                       sortBy,
-                       sortOrder,
-                       searchQuery) {
-    return axiosInstance(true, true)
-        .get("/movies", {
-            params: {
-                pageNumber,
-                pageSize,
-                sortBy,
-                sortOrder,
-                searchQuery
-            }
-        }).then((response) => {
-            if (response.status === 200) {
-                return response.data
-            }
-        })
-        .catch((error) => {
-            console.log("getMoviesPage")
-            console.log(error.response);
-            return Promise.reject(error)
-        })
-
+function getRecommendationPage(pageNumber, pageSize, sortBy, sortOrder, searchQuery) {
+  return axiosInstance(true, true)
+    .get("/movies/recommended", {
+      params: {
+        pageNumber,
+        pageSize,
+        sortBy,
+        sortOrder,
+        searchQuery,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      }
+    })
+    .catch((error) => {
+      console.log("getRecommendationPage");
+      console.log(error.response);
+      return Promise.reject(error);
+    });
 }
 
 /**
@@ -50,77 +69,79 @@ function getMoviesPage(pageNumber,
  * @returns {Promise<AxiosResponse<any>>}
  */
 function makeReservation(chairIds, moveId, price) {
-    return axiosInstance(true, true)
-        .post("/reservation", {
-            chairIds, moveId, price
-        })
-        .then(response => {
-            return response.data
-        })
-        .catch(error => {
-            console.log(error.response)
-        })
+  return axiosInstance(true, true)
+    .post("/reservation", {
+      chairIds,
+      moveId,
+      price,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
 }
 
 function getReservatedChairsByHall(cinemaHallId, movieId) {
-    return axiosInstance(true, true)
-        .get("/reservations/chairs/"+cinemaHallId+"/"+movieId)
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/reservations/chairs/" + cinemaHallId + "/" + movieId)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getChairsByCinemaHall(cinemaHallId) {
-    return axiosInstance(true, true)
-        .get("/cinemaHall/"+cinemaHallId+"/chairs")
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinemaHall/" + cinemaHallId + "/chairs")
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getChairsByCinema(cinemaId) {
-    return axiosInstance(true, true)
-        .get("/cinema/"+cinemaId+"/chairs")
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema/" + cinemaId + "/chairs")
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getCinemas() {
-    return axiosInstance(true, true)
-        .get("/cinema")
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema")
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getCinema(cinemaId) {
-    return axiosInstance(true, true)
-        .get("/cinema/"+cinemaId)
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema/" + cinemaId)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getCinemaHallsByCinema(cinemaId) {
-    return axiosInstance(true, true)
-        .get("/cinema/"+cinemaId+"/cinemaHall")
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema/" + cinemaId + "/cinemaHall")
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getCinemaHall(cinemaHallId) {
-    return axiosInstance(true, true)
-        .get("/cinema/cinemaHall/"+cinemaHallId)
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema/cinemaHall/" + cinemaHallId)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getAllGenres() {
-    return axiosInstance(true, true)
-        .get("/genres")
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/genres")
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
 
 function getMoviesByGenre(genre) {
-    return axiosInstance(true, true)
-        .get("/cinema/"+genre)
-        .then(response => response.data)
-        .catch(error => console.log(error.response))
+  return axiosInstance(true, true)
+    .get("/cinema/" + genre)
+    .then((response) => response.data)
+    .catch((error) => console.log(error.response));
 }
